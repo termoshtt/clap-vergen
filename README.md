@@ -3,6 +3,24 @@ clap-vergen
 
 Reusable clap subcommand `version` using [vergen](https://crates.io/crates/vergen)
 
+```rust
+use clap::Parser;
+use clap_vergen::Version;
+
+#[derive(Debug, clap::Parser)]
+enum Cli {
+    Version(Version),
+}
+
+fn main() {
+    match Cli::from_args() {
+        Cli::Version(version) => {
+            version.print().unwrap();
+        }
+    }
+}
+```
+
 License
 --------
 

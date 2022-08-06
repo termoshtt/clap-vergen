@@ -1,3 +1,23 @@
+//! Reusable clap subcommand `version` using [vergen](https://crates.io/crates/vergen)
+//!
+//! ```no_run
+//! use clap::Parser;
+//! use clap_vergen::Version;
+//!
+//! #[derive(Debug, clap::Parser)]
+//! enum Cli {
+//!     Version(Version),
+//! }
+//!
+//! fn main() {
+//!     match Cli::from_args() {
+//!         Cli::Version(version) => {
+//!             version.print().unwrap();
+//!         }
+//!     }
+//! }
+//! ```
+
 use anyhow::Result;
 use serde::Serialize;
 use std::fmt;
@@ -126,11 +146,25 @@ impl VergenInfo {
 }
 
 /// Output detail version info
+///
+/// See crate level document.
 #[derive(clap::Args, Debug, Clone)]
 pub struct Version {
     /// Output version info as JSON
     #[clap(long)]
     json: bool,
+}
+
+impl Version {
+    pub fn print(&self) -> Result<()> {
+        let info = VergenInfo::default();
+        if self.json {
+            println!("{}", info.to_json()?);
+        } else {
+            println!("{}", info);
+        }
+        Ok(())
+    }
 }
 
 #[cfg(test)]
