@@ -48,24 +48,6 @@ pub struct VergenInfo {
     pub cargo_profile: String,
     /// `VERGEN_CARGO_TARGET_TRIPLE` e.g. `x86_64-unknown-linux-gnu`
     pub cargo_target_triple: String,
-    /// `VERGEN_SYSINFO_NAME` e.g. `Manjaro Linux`
-    pub sysinfo_name: String,
-    /// `VERGEN_SYSINFO_OS_VERSION` e.g. `Linux Manjaro Linux`
-    pub sysinfo_os_version: String,
-    /// `VERGEN_SYSINFO_USER` e.g. `Yoda`
-    pub sysinfo_user: String,
-    /// `VERGEN_SYSINFO_TOTAL_MEMORY` e.g. `33 GB`
-    pub sysinfo_total_memory: String,
-    /// `VERGEN_SYSINFO_CPU_VENDOR` e.g. `Authentic AMD`
-    pub sysinfo_cpu_vendor: String,
-    /// `VERGEN_SYSINFO_CPU_CORE_COUNT` e.g. `8`
-    pub sysinfo_cpu_core_count: String,
-    /// `VERGEN_SYSINFO_CPU_NAME` e.g. `cpu0,cpu1,cpu2,cpu3,cpu4,cpu5,cpu6,cpu7`
-    pub sysinfo_cpu_name: String,
-    /// `VERGEN_SYSINFO_CPU_BRAND` e.g. `AMD Ryzen Threadripper 1900X 8-Core Processor`
-    pub sysinfo_cpu_brand: String,
-    /// `VERGEN_SYSINFO_CPU_FREQUENCY` e.g. `3792`
-    pub sysinfo_cpu_frequency: String,
     /// `VERGEN_GIT_BRANCH` e.g. `feature/fun`
     pub git_branch: String,
     /// `VERGEN_GIT_COMMIT_TIMESTAMP` e.g. `2021-02-24T20:55:21+00:00`
@@ -90,15 +72,6 @@ impl Default for VergenInfo {
             cargo_features: env!("VERGEN_CARGO_FEATURES").to_string(),
             cargo_profile: env!("VERGEN_CARGO_PROFILE").to_string(),
             cargo_target_triple: env!("VERGEN_CARGO_TARGET_TRIPLE").to_string(),
-            sysinfo_cpu_brand: env!("VERGEN_SYSINFO_CPU_BRAND").to_string(),
-            sysinfo_cpu_core_count: env!("VERGEN_SYSINFO_CPU_CORE_COUNT").to_string(),
-            sysinfo_cpu_frequency: env!("VERGEN_SYSINFO_CPU_FREQUENCY").to_string(),
-            sysinfo_cpu_name: env!("VERGEN_SYSINFO_CPU_NAME").to_string(),
-            sysinfo_cpu_vendor: env!("VERGEN_SYSINFO_CPU_VENDOR").to_string(),
-            sysinfo_name: env!("VERGEN_SYSINFO_NAME").to_string(),
-            sysinfo_os_version: env!("VERGEN_SYSINFO_OS_VERSION").to_string(),
-            sysinfo_total_memory: env!("VERGEN_SYSINFO_TOTAL_MEMORY").to_string(),
-            sysinfo_user: env!("VERGEN_SYSINFO_USER").to_string(),
             git_branch: env!("VERGEN_GIT_BRANCH").to_string(),
             git_commit_timestamp: env!("VERGEN_GIT_COMMIT_TIMESTAMP").to_string(),
             git_semver: env!("VERGEN_GIT_SEMVER").to_string(),
