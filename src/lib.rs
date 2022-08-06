@@ -118,9 +118,7 @@ impl VergenInfo {
     }
 }
 
-/// Output detail version info
-///
-/// See crate level document.
+/// Output detail version of executable
 #[derive(clap::Args, Debug, Clone)]
 pub struct Version {
     /// Output version info as JSON

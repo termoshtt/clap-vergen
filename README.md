@@ -21,6 +21,23 @@ fn main() {
 }
 ```
 
+This creates a `version` subcommand in the executable
+
+```
+$ ./target/debug/main version --help
+main-version
+Output detail version of executable
+
+USAGE:
+    main version [OPTIONS]
+
+OPTIONS:
+    -h, --help    Print help information
+        --json    Output version info as JSON
+```
+
+Two output formats are supported:
+
 ```
 $ ./target/debug/main version
 Build Timestamp:     2022-08-06T08:16:05.843030928Z
@@ -35,6 +52,8 @@ rustc Commit SHA:    7410ebb8f69516d0034cc99793bc3dcbc84d4a9b
 cargo Target Triple: x86_64-unknown-linux-gnu
 cargo Profile:       debug
 ```
+
+JSON output:
 
 ```
 $ ./target/debug/main version --json
