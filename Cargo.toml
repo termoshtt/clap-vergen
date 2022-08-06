@@ -3,7 +3,11 @@ name = "clap-vergen"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description   = "Reusable version clap subcommand using vergen"
+documentation = "https://docs.rs/clap-vergen"
+repository    = "https://github.com/termoshtt/clap-vergen"
+license       = "MIT OR Apache-2.0"
+readme        = "README.md"
 
 [dependencies]
 anyhow = "1.0.59"
