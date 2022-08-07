@@ -1,0 +1,13 @@
+[package]
+name = "clap-vergen-macro"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro-error = "1.0.4"
+proc-macro2 = "1.0.37"
+quote = "1.0.17"
+syn = { version = "1.0.91", features = ["full", "extra-traits"] }
