@@ -18,9 +18,10 @@
 //! }
 //! ```
 
-use anyhow::Result;
 use serde::Serialize;
 use std::fmt;
+
+pub use clap_vergen_macro::print;
 
 /// Infomations gathered by the default setting of
 /// [vergen::Config](https://docs.rs/vergen/latest/vergen/struct.Config.html)
@@ -58,28 +59,6 @@ pub struct VergenInfo {
     pub git_sha: String,
 }
 
-impl Default for VergenInfo {
-    fn default() -> Self {
-        Self {
-            build_semver: env!("VERGEN_BUILD_SEMVER").to_string(),
-            build_timestamp: env!("VERGEN_BUILD_TIMESTAMP").to_string(),
-            rustc_channel: env!("VERGEN_RUSTC_CHANNEL").to_string(),
-            rustc_commit_date: env!("VERGEN_RUSTC_COMMIT_DATE").to_string(),
-            rustc_commit_hash: env!("VERGEN_RUSTC_COMMIT_HASH").to_string(),
-            rustc_host_triple: env!("VERGEN_RUSTC_HOST_TRIPLE").to_string(),
-            rustc_llvm_version: env!("VERGEN_RUSTC_LLVM_VERSION").to_string(),
-            rustc_semver: env!("VERGEN_RUSTC_SEMVER").to_string(),
-            cargo_features: env!("VERGEN_CARGO_FEATURES").to_string(),
-            cargo_profile: env!("VERGEN_CARGO_PROFILE").to_string(),
-            cargo_target_triple: env!("VERGEN_CARGO_TARGET_TRIPLE").to_string(),
-            git_branch: env!("VERGEN_GIT_BRANCH").to_string(),
-            git_commit_timestamp: env!("VERGEN_GIT_COMMIT_TIMESTAMP").to_string(),
-            git_semver: env!("VERGEN_GIT_SEMVER").to_string(),
-            git_sha: env!("VERGEN_GIT_SHA").to_string(),
-        }
-    }
-}
-
 impl fmt::Display for VergenInfo {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         // Build Timestamp:     2021-02-23T20:14:46.558472672+00:00
@@ -113,8 +92,8 @@ impl fmt::Display for VergenInfo {
 }
 
 impl VergenInfo {
-    pub fn to_json(&self) -> Result<String> {
-        Ok(serde_json::to_string_pretty(self)?)
+    pub fn to_json(&self) -> String {
+        serde_json::to_string_pretty(self).expect("Fail to generate version JSON")
     }
 }
 
@@ -123,36 +102,12 @@ impl VergenInfo {
 pub struct Version {
     /// Output version info as JSON
     #[clap(long)]
-    json: bool,
-}
-
-impl Version {
-    pub fn print(&self) -> Result<()> {
-        let info = VergenInfo::default();
-        if self.json {
-            println!("{}", info.to_json()?);
-        } else {
-            println!("{}", info);
-        }
-        Ok(())
-    }
+    pub json: bool,
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn display() {
-        let info = VergenInfo::default();
-        println!("{}", info);
-    }
-
-    #[test]
-    fn json() {
-        let info = VergenInfo::default();
-        println!("{}", info.to_json().unwrap());
-    }
 
     #[test]
     fn verify_app() {
