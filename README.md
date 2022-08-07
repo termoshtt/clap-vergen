@@ -3,19 +3,35 @@ clap-vergen
 
 Reusable clap subcommand `version` using [vergen](https://crates.io/crates/vergen)
 
+Usage
+------
+
+Get version information in `build.rs`:
+
+```rust
+use vergen::{vergen, Config};
+
+fn main() {
+    let mut cfg = Config::default();
+    *cfg.sysinfo_mut().name_mut() = false;
+    vergen(cfg).expect("Fail to generate version info");
+}
+```
+
+Then, add a subcommand:
+
 ```rust
 use clap::Parser;
-use clap_vergen::Version;
 
 #[derive(Debug, clap::Parser)]
 enum Cli {
-    Version(Version),
+    Version(clap_vergen::Version),
 }
 
 fn main() {
     match Cli::from_args() {
         Cli::Version(version) => {
-            version.print().unwrap();
+            clap_vergen::print!(version);
         }
     }
 }
@@ -24,12 +40,12 @@ fn main() {
 This creates a `version` subcommand in the executable
 
 ```
-$ ./target/debug/main version --help
-main-version
+$ ./target/debug/clap-vergen-example version --help
+clap-vergen-example-version 
 Output detail version of executable
 
 USAGE:
-    main version [OPTIONS]
+    clap-vergen-example version [OPTIONS]
 
 OPTIONS:
     -h, --help    Print help information
@@ -39,7 +55,7 @@ OPTIONS:
 Two output formats are supported:
 
 ```
-$ ./target/debug/main version
+$ ./target/debug/clap-vergen-example version
 Build Timestamp:     2022-08-06T08:16:05.843030928Z
 Build Version:       0.1.0
 Commit SHA:          f1af7e4b9fc58b7aa73b1e14a617d9a341a9880d
@@ -56,7 +72,7 @@ cargo Profile:       debug
 JSON output:
 
 ```
-$ ./target/debug/main version --json
+$ ./target/debug/clap-vergen-example version --json
 {
   "build_timestamp": "2022-08-06T08:16:05.843030928Z",
   "build_semver": "0.1.0",
@@ -75,6 +91,8 @@ $ ./target/debug/main version --json
   "git_sha": "f1af7e4b9fc58b7aa73b1e14a617d9a341a9880d"
 }
 ```
+
+See [clap-vergen-example](./clap-vergen-example) for working example.
 
 License
 --------
