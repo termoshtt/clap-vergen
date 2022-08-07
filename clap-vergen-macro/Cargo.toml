@@ -3,6 +3,12 @@ name = "clap-vergen-macro"
 version = "0.1.0"
 edition = "2021"
 
+description   = "proc-macro for cargo-vergen"
+documentation = "https://docs.rs/clap-vergen-macro"
+repository    = "https://github.com/termoshtt/clap-vergen"
+license       = "MIT OR Apache-2.0"
+readme        = "../README.md"
+
 [lib]
 proc-macro = true
 
