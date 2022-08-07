@@ -7,7 +7,7 @@ edition = "2021"
 clap = { version = "3.2.16", features = ["derive"] }
 
 [dependencies.clap-vergen]
-version = "0.1.0"
+version = "0.2.0"
 path = "../clap-vergen"
 
 [build-dependencies]
