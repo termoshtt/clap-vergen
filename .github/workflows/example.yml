@@ -1,0 +1,20 @@
+name: example
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+jobs:
+  run:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions-rs/cargo@v1
+      with:
+        command: run
+        args: >
+          --manifest-path=clap-vergen-example/Cargo.toml
+          --
+          version

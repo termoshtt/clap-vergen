@@ -1,8 +1,7 @@
-use anyhow::Result;
 use vergen::{vergen, Config};
 
-fn main() -> Result<()> {
+fn main() {
     let mut cfg = Config::default();
     *cfg.sysinfo_mut().name_mut() = false;
-    vergen(cfg)
+    vergen(cfg).expect("Fail to generate version info");
 }
