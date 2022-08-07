@@ -27,10 +27,7 @@ fn print_impl(input: TokenStream2) -> TokenStream2 {
             git_sha: env!("VERGEN_GIT_SHA").to_string(),
         };
         if #input.json {
-            println!(
-                "{}",
-                info.to_json().expect("Fail to generate version JSON")
-            );
+            println!("{}", info.to_json());
         } else {
             println!("{}", info);
         }
